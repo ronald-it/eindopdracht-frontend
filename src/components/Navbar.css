@@ -1,0 +1,36 @@
+.title-and-navbar {
+    padding: 25px;
+    /*border: 3px solid red;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #EEEEEE;
+}
+
+.ul-header {
+    /*border: 3px solid green;*/
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.page-title {
+    /*border: 3px solid red;*/
+    color: #283E53;
+    font-weight: lighter;
+}
+
+.ul-header > li {
+    padding-right: 3em;
+    text-decoration: none;
+    font-size: larger;
+    font-weight: bolder;
+    letter-spacing: 0.1mm;
+}
+
+.ul-header a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #373737;
+}
