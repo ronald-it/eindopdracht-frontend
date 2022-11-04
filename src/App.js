@@ -10,29 +10,32 @@ import {
     Route,
 } from 'react-router-dom';
 import {Navbar} from "./components/Navbar";
+import './assets/fonts/fonts.css';
+import {Footer} from "./components/Footer";
 
 function App() {
     return (
-        <Router>
+        <>
             <Navbar/>
             <Switch>
                 <Route exact path="/">
                     <Homepage/>
                 </Route>
-                <Route exact path="/recipe">
+                <Route path="/recipe">
                     <Recipepage/>
                 </Route>
-                <Route exact path="/calculator">
+                <Route path="/calculator">
                     <Calculator/>
                 </Route>
-                <Route exact path="/login">
+                <Route path="/login">
                     <Login/>
                 </Route>
-                <Route exact path="/registration">
+                <Route path="/registration">
                     <Registration/>
                 </Route>
             </Switch>
-        </Router>
+            <Footer/>
+        </>
     );
 }
 

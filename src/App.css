@@ -8,11 +8,11 @@
 }
 
 /* ------------------------------- 2. Typography ----------------------------------- */
-h1 {
+h2 {
     font-family: 'Austein', sans-serif;
 }
 
-h2, h3, h4, h5, h6, body {
+h1, h3, h4, h5, h6, body {
     font-family: 'Poppins', sans-serif;
 }
 

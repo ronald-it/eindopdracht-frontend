@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Calculator.css';
 
 export function Calculator() {
     return (
@@ -6,4 +7,4 @@ export function Calculator() {
             <p>Calculator</p>
         </div>
     );
-};
+}
