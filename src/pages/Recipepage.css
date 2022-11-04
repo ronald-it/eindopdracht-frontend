@@ -1,0 +1,155 @@
+
+/* ------------------------------- 5. Areas Recipe Page ---------------------------------------- */
+/* --------------- 5.1 Main ------------------- */
+
+.outer-container-main-recipe {
+    /*border: 3px solid red;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.inner-container-main-recipe {
+    /*border: 3px solid green;*/
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-basis: 1050px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.title-and-time-image {
+    /*border: 3px solid blue;*/
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    margin-bottom: 2em;
+}
+
+.time-image-div-recipe {
+    /*border: 3px solid red;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 110px;
+}
+
+.time-text-recipe-number {
+    color: #283E55;
+    font-weight: bold;
+    font-size: large;
+}
+
+.time-text-recipe-minutes {
+    color: #283E55;
+    font-size: large;
+}
+
+.recipe-name {
+    /*border: 3px solid blue;*/
+    color: #283E55;
+}
+
+.recipe-text-and-image {
+    /*border: 3px solid red;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+.recipe-instructions {
+    /*border: 3px solid green;*/
+    flex-basis: 500px;
+    color: #283E55;
+}
+
+.recipe-picture {
+    /*border: 3px solid red;*/
+    height: 400px;
+    width: 400px;
+}
+
+.recipe-image {
+    /*border: 3px solid blue;*/
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0 1px 1px, rgba(9, 30, 66, 0.13) 0 0 1px 1px;
+}
+
+.recipe-ingredients-and-nutrients {
+    /*border: 3px solid blue;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1050px;
+    margin-bottom: 2em;
+}
+
+.recipe-ingredients {
+    /*border: 3px solid green;*/
+    flex-basis: 400px;
+    color: #283E55;
+}
+
+.recipe-ingredients-title {
+    font-weight: 600;
+}
+
+.ingredients-ul {
+    margin-left: 2em;
+}
+
+.ingredients-ul li {
+    color: #283E55;
+}
+
+.recipe-nutrients {
+    /*border: 3px solid red;*/
+    flex-basis: 400px;
+}
+
+.recipe-nutrients-title {
+    color: #283E55;
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+.recipe-nutrients table {
+    /*border: 3px solid blue;*/
+    width: 400px;
+}
+
+.recipe-health-labels-div {
+    /*border: 3px solid blue;*/
+    color: #283E55;
+    width: 500px;
+}
+
+.recipe-health-labels-title {
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+.recipe-health-labels p {
+    border: solid 1px #283E55;
+    background-color: #70B6BE;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: small;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.recipe-health-labels {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}

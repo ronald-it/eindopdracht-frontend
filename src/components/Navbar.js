@@ -9,20 +9,29 @@ export function Navbar() {
             <nav>
                 <ul className="ul-header">
                     <li>
-                        <NavLink to="/" exact activeClassName="active-link">Home</NavLink>
+                        <NavLink to="/" exact>
+                            Home
+                        </NavLink>
                     </li>
                     <li>
-                        <NavHashLink to="#outer-container-footer" activeClassName="active-link"
-                        >About</NavHashLink>
+                        <NavHashLink to="#outer-container-footer">
+                            About
+                        </NavHashLink>
                     </li>
                     <li>
-                        <NavLink to="/calculator" activeClassName="active-link">Calculator</NavLink>
+                        <NavLink to="/calculator">
+                            Calculator
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/login" activeClassName="active-link">Login</NavLink>
+                        <NavLink to="/login">
+                            Login
+                        </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/registration" exact activeClassName="active-link">Registration</NavLink>
+                        <NavLink to="/registration">
+                            Registration
+                        </NavLink>
                     </li>
                 </ul>
             </nav>
