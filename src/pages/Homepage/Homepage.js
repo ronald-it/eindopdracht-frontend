@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './Homepage.css';
 import {HashLink} from "react-router-hash-link";
-import klokje from "../assets/icons/time.svg";
+import klokje from "../../assets/icons/time.svg";
 import {Link} from "react-router-dom";
 
 export function Homepage() {

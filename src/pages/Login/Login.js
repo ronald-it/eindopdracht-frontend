@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './Login.css';
 
 export function Login() {
     return (
@@ -6,4 +7,4 @@ export function Login() {
             <p>Login</p>
         </div>
     );
-};
+}

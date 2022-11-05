@@ -1,9 +1,9 @@
 import './App.css';
-import {Homepage} from "./pages/Homepage";
-import {Recipepage} from "./pages/Recipepage";
-import {Calculator} from "./pages/Calculator";
-import {Login} from "./pages/Login";
-import {Registration} from "./pages/Registration";
+import {Homepage} from "./pages/Homepage/Homepage";
+import {Recipepage} from "./pages/Recipepage/Recipepage";
+import {Calculator} from "./pages/Calculator/Calculator";
+import {Login} from "./pages/Login/Login";
+import {Registration} from "./pages/Registration/Registration";
 import {
     BrowserRouter as Router,
     Switch,

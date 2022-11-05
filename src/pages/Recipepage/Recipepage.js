@@ -1,5 +1,5 @@
 import * as React from 'react';
-import klokje from "../assets/icons/time.svg";
+import klokje from "../../assets/icons/time.svg";
 import "./Recipepage.css";
 
 export function Recipepage() {
