@@ -17,6 +17,11 @@ h1, h3, h4, h5, h6, body {
 }
 
 /* ------------------------------- 3. Layout --------------------------------------- */
+
+.content-container {
+    min-height: calc(100vh - 224px);
+}
+
 .outer-container-header {
     /*border: 3px solid blue;*/
     display: flex;

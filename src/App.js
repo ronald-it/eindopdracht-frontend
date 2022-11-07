@@ -16,25 +16,29 @@ import {Footer} from "./components/Footer";
 function App() {
     return (
         <>
-            <Navbar/>
-            <Switch>
-                <Route exact path="/">
-                    <Homepage/>
-                </Route>
-                <Route path="/recipe">
-                    <Recipepage/>
-                </Route>
-                <Route path="/calculator">
-                    <Calculator/>
-                </Route>
-                <Route path="/login">
-                    <Login/>
-                </Route>
-                <Route path="/registration">
-                    <Registration/>
-                </Route>
-            </Switch>
-            <Footer/>
+            <div className="content-container">
+                <Navbar/>
+                <Switch>
+                    <Route exact path="/">
+                        <Homepage/>
+                    </Route>
+                    <Route path="/recipe">
+                        <Recipepage/>
+                    </Route>
+                    <Route path="/calculator">
+                        <Calculator/>
+                    </Route>
+                    <Route path="/login">
+                        <Login/>
+                    </Route>
+                    <Route path="/registration">
+                        <Registration/>
+                    </Route>
+                </Switch>
+            </div>
+            <footer className="footer--pin">
+                <Footer/>
+            </footer>
         </>
     );
 }
