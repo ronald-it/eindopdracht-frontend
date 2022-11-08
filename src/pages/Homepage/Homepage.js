@@ -46,7 +46,7 @@ export function Homepage() {
             // Create Elements functie aanroepen en parameters toevoegen
             // createRecipeCardHome(response.data.hits);
 
-            setRecipes(response);
+            setRecipes(response.data.hits);
             console.log(response.data.hits);
 
             // Catch block
@@ -240,17 +240,15 @@ export function Homepage() {
 
                     {/*<!--        Search results-->*/}
 
-                    <p>{ingredient}, {mealType}, {cuisine}, {diet}, {time}</p>
-
                     <div className="outer-container-search-results">
                         <div id="inner-container-search-results" className="inner-container-search-results">
 
-                            {recipes && recipes.map((entry) => {
-                                return <Link id="recipe-link" to="/recipepage">
+                            {Object.keys(recipes).length > 0 && recipes.map((entry) => {
+                                return <Link to={`/recipe/${entry.recipe.uri.split("_")[1]}`} id="recipe-link" key={entry.recipe.uri.split("_")[1]}>
                                     <div className="carousel-card-result">
                                         <img className="carousel-card-image-result"
                                              src={entry.recipe.image}
-                                             alt="Recipe image"/>
+                                             alt="Recipe"/>
                                         <br/>
                                         <div className="recipe-title-result">
                                             <p>{entry.recipe.label}</p>
@@ -271,156 +269,6 @@ export function Homepage() {
                                     </div>
                                 </Link>
                             })}
-
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-result">
-                                    <img className="carousel-card-image-result"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Recipe"/>
-                                    <br/>
-                                    <div className="recipe-title-result">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-result">
-                                        <div className="calories-ingredients-div-result">
-                                            <p className="calories-number-result">500</p>
-                                            <p className="calories-text-result">Calories | </p>
-                                            <p className="ingredients-number-result">5</p>
-                                            <p className="ingredients-text-result">Ingredients</p>
-                                        </div>
-                                        <div className="time-image-div-result">
-                                            <img className="time-image-result" src={klokje} alt="time"/>
-                                            <p className="time-text-result">30 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-result">
-                                    <img className="carousel-card-image-result"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Recipe"/>
-                                    <br/>
-                                    <div className="recipe-title-result">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-result">
-                                        <div className="calories-ingredients-div-result">
-                                            <p className="calories-number-result">500</p>
-                                            <p className="calories-text-result">Calories | </p>
-                                            <p className="ingredients-number-result">5</p>
-                                            <p className="ingredients-text-result">Ingredients</p>
-                                        </div>
-                                        <div className="time-image-div-result">
-                                            <img className="time-image-result" src={klokje} alt="time"/>
-                                            <p className="time-text-result">30 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-result">
-                                    <img className="carousel-card-image-result"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Recipe"/>
-                                    <br/>
-                                    <div className="recipe-title-result">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-result">
-                                        <div className="calories-ingredients-div-result">
-                                            <p className="calories-number-result">500</p>
-                                            <p className="calories-text-result">Calories | </p>
-                                            <p className="ingredients-number-result">5</p>
-                                            <p className="ingredients-text-result">Ingredients</p>
-                                        </div>
-                                        <div className="time-image-div-result">
-                                            <img className="time-image-result" src={klokje} alt="time"/>
-                                            <p className="time-text-result">30 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-result">
-                                    <img className="carousel-card-image-result"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Recipe"/>
-                                    <br/>
-                                    <div className="recipe-title-result">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-result">
-                                        <div className="calories-ingredients-div-result">
-                                            <p className="calories-number-result">500</p>
-                                            <p className="calories-text-result">Calories | </p>
-                                            <p className="ingredients-number-result">5</p>
-                                            <p className="ingredients-text-result">Ingredients</p>
-                                        </div>
-                                        <div className="time-image-div-result">
-                                            <img className="time-image-result" src={klokje} alt="time"/>
-                                            <p className="time-text-result">30 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-result">
-                                    <img className="carousel-card-image-result"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Recipe"/>
-                                    <br/>
-                                    <div className="recipe-title-result">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-result">
-                                        <div className="calories-ingredients-div-result">
-                                            <p className="calories-number-result">500</p>
-                                            <p className="calories-text-result">Calories | </p>
-                                            <p className="ingredients-number-result">5</p>
-                                            <p className="ingredients-text-result">Ingredients</p>
-                                        </div>
-                                        <div className="time-image-div-result">
-                                            <img className="time-image-result" src={klokje} alt="time"/>
-                                            <p className="time-text-result">30 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-result">
-                                    <img className="carousel-card-image-result"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Recipe"/>
-                                    <br/>
-                                    <div className="recipe-title-result">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-result">
-                                        <div className="calories-ingredients-div-result">
-                                            <p className="calories-number-result">500</p>
-                                            <p className="calories-text-result">Calories | </p>
-                                            <p className="ingredients-number-result">5</p>
-                                            <p className="ingredients-text-result">Ingredients</p>
-                                        </div>
-                                        <div className="time-image-div-result">
-                                            <img className="time-image-result" src={klokje} alt="time"/>
-                                            <p className="time-text-result">30 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
 
                         </div>
                     </div>

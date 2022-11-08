@@ -1,8 +1,12 @@
 import * as React from 'react';
 import klokje from "../../assets/icons/time.svg";
 import "./Recipepage.css";
+import {useParams} from "react-router-dom";
 
 export function Recipepage() {
+    const { id } = useParams();
+    console.log(id);
+
     return (
         <>
 
