@@ -22,7 +22,7 @@ function App() {
                     <Route exact path="/">
                         <Homepage/>
                     </Route>
-                    <Route path="/recipe">
+                    <Route path="/recipe/:id">
                         <Recipepage/>
                     </Route>
                     <Route path="/calculator">

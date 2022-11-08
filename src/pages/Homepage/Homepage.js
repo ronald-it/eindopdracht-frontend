@@ -3,8 +3,58 @@ import './Homepage.css';
 import {HashLink} from "react-router-hash-link";
 import klokje from "../../assets/icons/time.svg";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {useState} from "react";
 
 export function Homepage() {
+    //Opslaan van URI en endpoint
+    const URI = 'https://api.edamam.com';
+    const endpoint = '/api/recipes/v2';
+    const API_ID = '44920bbe';
+    const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
+
+    const [ingredient, setIngredient] = useState('');
+    const [mealType, setMealType] = useState('');
+    const [cuisine, setCuisine] = useState('');
+    const [diet, setDiet] = useState('');
+    const [time, setTime] = useState('');
+
+    //Initialiseren van useState
+
+    const [recipes, setRecipes] = useState([]);
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+
+    const fetchDataHome = async (ingredient, mealType, cuisineType, diet, time) => {
+
+        // Try block
+        try {
+            // Response van request opslaan
+            const response = await axios.get(`${URI}${endpoint}`, {
+                params: {
+                    type: 'public',
+                    app_id: API_ID,
+                    app_key: API_KEY,
+                    q: ingredient,
+                    mealType: mealType ? mealType : null,
+                    cuisineType: cuisineType ? cuisineType : null,
+                    diet: diet ? diet : null,
+                    time: time ? time : null,
+                }
+            });
+            // console.log(response.data.hits);
+            // Create Elements functie aanroepen en parameters toevoegen
+            // createRecipeCardHome(response.data.hits);
+
+            setRecipes(response);
+            console.log(response.data.hits);
+
+            // Catch block
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     return (
         <>
 
@@ -115,16 +165,22 @@ export function Homepage() {
 
                     <div className="outer-container-searchbar">
                         <div className="inner-container-searchbar">
-                            <form id="submit-form">
+                            <form id="submit-form" onSubmit={(e) => {
+                                e.preventDefault();
+                                fetchDataHome(ingredient, mealType, cuisine, diet, time);
+                                }
+                            }>
                                 <label htmlFor="search-bar">
                                     <input className="search-bar-input" type="text" placeholder="Recipe search"
-                                           id="search-bar" name="recipe"/>
+                                           id="search-bar" name="recipe" value={ingredient}
+                                           onChange={(e) => setIngredient(e.target.value)}/>
                                 </label>
                                 <button id="magnifying-glass" type="button">
                                     {/*<img class="search-icon" src="assets/icons/search.png" alt="search icon">*/}
                                 </button>
                                 <label htmlFor="meals"></label>
-                                <select name="meals" id="meals">
+                                <select name="meals" id="meals" value={mealType}
+                                        onChange={(e) => setMealType(e.target.value)}>
                                     <option value="">Meal type</option>
                                     <option value="breakfast">Breakfast</option>
                                     <option value="brunch">Brunch</option>
@@ -134,7 +190,8 @@ export function Homepage() {
                                     <option value="teatime">Tea time</option>
                                 </select>
                                 <label htmlFor="cuisine"></label>
-                                <select name="cuisine" id="cuisine">
+                                <select name="cuisine" id="cuisine" value={cuisine}
+                                        onChange={(e) => setCuisine(e.target.value)}>
                                     <option value="">Cuisine</option>
                                     <option value="american">American</option>
                                     <option value="asian">Asian</option>
@@ -159,7 +216,7 @@ export function Homepage() {
                                     <option value="world">World</option>
                                 </select>
                                 <label htmlFor="diet"></label>
-                                <select name="diet" id="diet">
+                                <select name="diet" id="diet" value={diet} onChange={(e) => setDiet(e.target.value)}>
                                     <option value="">Diet</option>
                                     <option value="balanced">Balanced</option>
                                     <option value="high-fiber">High-Fiber</option>
@@ -169,7 +226,7 @@ export function Homepage() {
                                     <option value="low-sodium">Low-Sodium</option>
                                 </select>
                                 <label htmlFor="time"></label>
-                                <select name="time" id="time">
+                                <select name="time" id="time" value={time} onChange={(e) => setTime(e.target.value)}>
                                     <option value="">Time</option>
                                     <option value="0-15">0 - 15</option>
                                     <option value="15-30">15-30</option>
@@ -183,8 +240,37 @@ export function Homepage() {
 
                     {/*<!--        Search results-->*/}
 
+                    <p>{ingredient}, {mealType}, {cuisine}, {diet}, {time}</p>
+
                     <div className="outer-container-search-results">
                         <div id="inner-container-search-results" className="inner-container-search-results">
+
+                            {recipes && recipes.map((entry) => {
+                                return <Link id="recipe-link" to="/recipepage">
+                                    <div className="carousel-card-result">
+                                        <img className="carousel-card-image-result"
+                                             src={entry.recipe.image}
+                                             alt="Recipe image"/>
+                                        <br/>
+                                        <div className="recipe-title-result">
+                                            <p>{entry.recipe.label}</p>
+                                        </div>
+                                        <br/>
+                                        <div className="calories-ingredients-time-result">
+                                            <div className="calories-ingredients-div-result">
+                                                <p className="calories-number-result">{Math.round(entry.recipe.calories)}</p>
+                                                <p className="calories-text-result">Calories | </p>
+                                                <p className="ingredients-number-result">{entry.recipe.ingredients.length}</p>
+                                                <p className="ingredients-text-result">Ingredients</p>
+                                            </div>
+                                            <div className="time-image-div-result">
+                                                <img className="time-image-result" src={klokje} alt="time"/>
+                                                <p className="time-text-result">{entry.recipe.totalTime} min.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            })}
 
                             <Link id="recipe-link" to="/recipe">
                                 <div className="carousel-card-result">
@@ -205,7 +291,7 @@ export function Homepage() {
                                         </div>
                                         <div className="time-image-div-result">
                                             <img className="time-image-result" src={klokje} alt="time"/>
-                                                <p className="time-text-result">30 min.</p>
+                                            <p className="time-text-result">30 min.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -341,5 +427,5 @@ export function Homepage() {
                 </div>
             </main>
         </>
-);
+    );
 }
