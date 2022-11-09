@@ -4,7 +4,8 @@ import {HashLink} from "react-router-hash-link";
 import klokje from "../../assets/icons/time.svg";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import magnifier from "../../assets/icons/search.png"
 
 export function Homepage() {
     //Opslaan van URI en endpoint
@@ -13,19 +14,26 @@ export function Homepage() {
     const API_ID = '44920bbe';
     const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
 
+    //Initialiseren van useState
+
     const [ingredient, setIngredient] = useState('');
     const [mealType, setMealType] = useState('');
     const [cuisine, setCuisine] = useState('');
     const [diet, setDiet] = useState('');
     const [time, setTime] = useState('');
 
-    //Initialiseren van useState
-
     const [recipes, setRecipes] = useState([]);
+    const [carousel, setCarousel] = useState([]);
+
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
+    // Getal randomizer voor carousel kaarten
+    const randomizer = Math.round(Math.random() * 17);
+
     const fetchDataHome = async (ingredient, mealType, cuisineType, diet, time) => {
+        toggleError(false);
+        toggleLoading(true);
 
         // Try block
         try {
@@ -52,8 +60,45 @@ export function Homepage() {
             // Catch block
         } catch (err) {
             console.error(err)
+            toggleError(true);
         }
+
+        toggleLoading(false);
     }
+
+    useEffect(() => {
+        //... voer dingen uit
+        const fetchDataCarousel = async () => {
+            toggleError(false);
+            toggleLoading(true);
+
+            // Try block
+            try {
+                // Response van request opslaan
+                const response = await axios.get(`${URI}${endpoint}`, {
+
+                    params: {
+                        type: 'public',
+                        app_id: API_ID,
+                        app_key: API_KEY,
+                        q: "potato"
+                    }
+
+                });
+                console.log(response.data.hits);
+                setCarousel(response.data.hits);
+
+                // Catch block
+            } catch (err) {
+                console.error(err)
+                toggleError(true);
+            }
+        }
+
+        fetchDataCarousel();
+        toggleLoading(false);
+
+    }, []);
 
     return (
         <>
@@ -84,83 +129,89 @@ export function Homepage() {
                     <div className="outer-container-carousel" id="outer-container-carousel-id">
                         <div className="inner-container-carousel" id="inner-container-carousel-id">
 
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-one">
-                                    <img className="carousel-card-image-one"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Food"/>
-                                    <br/>
-                                    <div className="recipe-title-one">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-one">
-                                        <div className="calories-ingredients-div">
-                                            <p className="calories-number">100</p>
-                                            <p className="calories-text">Calories |</p>
-                                            <p className="ingredients-number">5</p>
-                                            <p className="ingredients-text">Ingredients</p>
-                                        </div>
-                                        <div className="time-image-div">
-                                            <img className="time-image" src={klokje} alt="time"/>
-                                            <p className="time-text">20 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
+                            {loading && <span>Loading...</span>}
 
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-two">
-                                    <img className="carousel-card-image-two"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Food"/>
-                                    <br/>
-                                    <div className="recipe-title-two">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-two">
-                                        <div className="calories-ingredients-div">
-                                            <p className="calories-number">100</p>
-                                            <p className="calories-text">Calories |</p>
-                                            <p className="ingredients-number">5</p>
-                                            <p className="ingredients-text">Ingredients</p>
+                            {Object.keys(carousel).length > 0 &&
+                                <>
+                                    <Link to={`/recipe/${carousel[randomizer].recipe.uri.split("_")[1]}`} id="recipe-link">
+                                        <div className="carousel-card-one">
+                                            <img className="carousel-card-image-one"
+                                                 src={`${carousel[randomizer].recipe.image}`}
+                                                 alt="Food"/>
+                                            <br/>
+                                            <div className="recipe-title-one">
+                                                <p>{carousel[randomizer].recipe.label}</p>
+                                            </div>
+                                            <br/>
+                                            <div className="calories-ingredients-time-one">
+                                                <div className="calories-ingredients-div">
+                                                    <p className="calories-number">{Math.round(carousel[randomizer].recipe.calories)}</p>
+                                                    <p className="calories-text">Calories |</p>
+                                                    <p className="ingredients-number">{carousel[randomizer].recipe.ingredients.length}</p>
+                                                    <p className="ingredients-text">Ingredients</p>
+                                                </div>
+                                                <div className="time-image-div">
+                                                    <img className="time-image" src={klokje} alt="time"/>
+                                                    <p className="time-text">{carousel[randomizer].recipe.totalTime} min.</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="time-image-div">
-                                            <img className="time-image" src={klokje} alt="time"/>
-                                            <p className="time-text">20 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
+                                    </Link>
 
-                            <Link id="recipe-link" to="/recipe">
-                                <div className="carousel-card-three">
-                                    <img className="carousel-card-image-three"
-                                         src="https://www.oetker.nl/Recipe/Recipes/oetker.nl/nl-nl/miscellaneous/image-thumb__97330__RecipeDetail/pizza-caprese.webp"
-                                         alt="Food"/>
-                                    <br/>
-                                    <div className="recipe-title-three">
-                                        <p>Recipe name</p>
-                                    </div>
-                                    <br/>
-                                    <div className="calories-ingredients-time-three">
-                                        <div className="calories-ingredients-div">
-                                            <p className="calories-number">100</p>
-                                            <p className="calories-text">Calories |</p>
-                                            <p className="ingredients-number">5</p>
-                                            <p className="ingredients-text">Ingredients</p>
+                                    <Link to={`/recipe/${carousel[randomizer+1].recipe.uri.split("_")[1]}`} id="recipe-link">
+                                        <div className="carousel-card-two">
+                                            <img className="carousel-card-image-two"
+                                                 src={`${carousel[randomizer+1].recipe.image}`}
+                                                 alt="Food"/>
+                                            <br/>
+                                            <div className="recipe-title-two">
+                                                <p>{carousel[randomizer+1].recipe.label}</p>
+                                            </div>
+                                            <br/>
+                                            <div className="calories-ingredients-time-two">
+                                                <div className="calories-ingredients-div">
+                                                    <p className="calories-number">{Math.round(carousel[randomizer+1].recipe.calories)}</p>
+                                                    <p className="calories-text">Calories |</p>
+                                                    <p className="ingredients-number">{carousel[randomizer+1].recipe.ingredients.length}</p>
+                                                    <p className="ingredients-text">Ingredients</p>
+                                                </div>
+                                                <div className="time-image-div">
+                                                    <img className="time-image" src={klokje} alt="time"/>
+                                                    <p className="time-text">{carousel[randomizer+1].recipe.totalTime} min.</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="time-image-div">
-                                            <img className="time-image" src={klokje} alt="time"/>
-                                            <p className="time-text">20 min.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
+                                    </Link>
 
+                                    <Link to={`/recipe/${carousel[randomizer+2].recipe.uri.split("_")[1]}`} id="recipe-link">
+                                        <div className="carousel-card-three">
+                                            <img className="carousel-card-image-three"
+                                                 src={`${carousel[randomizer+2].recipe.image}`}
+                                                 alt="Food"/>
+                                            <br/>
+                                            <div className="recipe-title-three">
+                                                <p>{carousel[randomizer+2].recipe.label}</p>
+                                            </div>
+                                            <br/>
+                                            <div className="calories-ingredients-time-three">
+                                                <div className="calories-ingredients-div">
+                                                    <p className="calories-number">{Math.round(carousel[randomizer+2].recipe.calories)}</p>
+                                                    <p className="calories-text">Calories |</p>
+                                                    <p className="ingredients-number">{carousel[randomizer+2].recipe.ingredients.length}</p>
+                                                    <p className="ingredients-text">Ingredients</p>
+                                                </div>
+                                                <div className="time-image-div">
+                                                    <img className="time-image" src={klokje} alt="time"/>
+                                                    <p className="time-text">{carousel[randomizer+2].recipe.totalTime} min.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </>
+                            }
                         </div>
                     </div>
+
                     {/*<!--        Searchbar-->*/}
 
                     <div className="outer-container-searchbar">
@@ -168,7 +219,7 @@ export function Homepage() {
                             <form id="submit-form" onSubmit={(e) => {
                                 e.preventDefault();
                                 fetchDataHome(ingredient, mealType, cuisine, diet, time);
-                                }
+                            }
                             }>
                                 <label htmlFor="search-bar">
                                     <input className="search-bar-input" type="text" placeholder="Recipe search"
@@ -176,7 +227,7 @@ export function Homepage() {
                                            onChange={(e) => setIngredient(e.target.value)}/>
                                 </label>
                                 <button id="magnifying-glass" type="button">
-                                    {/*<img class="search-icon" src="assets/icons/search.png" alt="search icon">*/}
+                                    <img className="search-icon" src={magnifier} alt="search icon"/>
                                 </button>
                                 <label htmlFor="meals"></label>
                                 <select name="meals" id="meals" value={mealType}
@@ -243,8 +294,17 @@ export function Homepage() {
                     <div className="outer-container-search-results">
                         <div id="inner-container-search-results" className="inner-container-search-results">
 
+                            {error &&
+                                <span className="ingredient-error">
+                                    Er is iets misgegaan met het ophalen van de data, probeer het opnieuw.
+                                </span>
+                            }
+
+                            {loading && <span>Loading...</span>}
+
                             {Object.keys(recipes).length > 0 && recipes.map((entry) => {
-                                return <Link to={`/recipe/${entry.recipe.uri.split("_")[1]}`} id="recipe-link" key={entry.recipe.uri.split("_")[1]}>
+                                return <Link to={`/recipe/${entry.recipe.uri.split("_")[1]}`} id="recipe-link"
+                                             key={entry.recipe.uri.split("_")[1]}>
                                     <div className="carousel-card-result">
                                         <img className="carousel-card-image-result"
                                              src={entry.recipe.image}
