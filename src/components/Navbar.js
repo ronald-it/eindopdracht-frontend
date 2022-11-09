@@ -1,11 +1,14 @@
 import * as React from 'react';
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import './Navbar.css';
 import {NavHashLink} from "react-router-hash-link";
 
 export function Navbar() {
     return (
-        <div className="title-and-navbar"><h2 className="page-title">The Clueless Cook</h2>
+        <div className="title-and-navbar">
+            <Link className="clueless-cook-link" to="/" exact>
+                <h2 className="page-title">The Clueless Cook</h2>
+            </Link>
             <nav>
                 <ul className="ul-header">
                     <li>

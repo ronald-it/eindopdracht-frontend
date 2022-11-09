@@ -28,8 +28,15 @@ export function Homepage() {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
-    // Getal randomizer voor carousel kaarten
-    const randomizer = Math.round(Math.random() * 17);
+    const [errorCarousel, toggleErrorCarousel] = useState(false);
+    const [loadingCarousel, toggleLoadingCarousel] = useState(false);
+
+    const [randomizer, setRandomizer] = useState(0)
+
+    //Gebruik van setRandomizer voor de creatie van een getal in de Randomizer state
+    useEffect(() => {
+        setRandomizer(Math.round(Math.random() * 17));
+    }, []);
 
     const fetchDataHome = async (ingredient, mealType, cuisineType, diet, time) => {
         toggleError(false);
@@ -69,8 +76,8 @@ export function Homepage() {
     useEffect(() => {
         //... voer dingen uit
         const fetchDataCarousel = async () => {
-            toggleError(false);
-            toggleLoading(true);
+            toggleErrorCarousel(false);
+            toggleLoadingCarousel(true);
 
             // Try block
             try {
@@ -91,12 +98,12 @@ export function Homepage() {
                 // Catch block
             } catch (err) {
                 console.error(err)
-                toggleError(true);
+                toggleErrorCarousel(true);
             }
         }
 
         fetchDataCarousel();
-        toggleLoading(false);
+        toggleLoadingCarousel(false);
 
     }, []);
 
@@ -129,7 +136,7 @@ export function Homepage() {
                     <div className="outer-container-carousel" id="outer-container-carousel-id">
                         <div className="inner-container-carousel" id="inner-container-carousel-id">
 
-                            {loading && <span>Loading...</span>}
+                            {loadingCarousel && <span>Loading...</span>}
 
                             {Object.keys(carousel).length > 0 &&
                                 <>
