@@ -2,10 +2,58 @@ import * as React from 'react';
 import klokje from "../../assets/icons/time.svg";
 import "./Recipepage.css";
 import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export function Recipepage() {
+    //Recept ID
     const { id } = useParams();
     console.log(id);
+
+    //Opslaan van URI en endpoint
+    const URI = 'https://api.edamam.com';
+    const endpoint = `/api/recipes/v2/${id}`;
+    const API_ID = '44920bbe';
+    const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
+
+    //Initialiseren van useState
+    const [recipeInfo, setRecipeInfo] = useState([]);
+    const [error, toggleError] = useState(false);
+    const [loading, toggleLoading] = useState(false);
+
+    useEffect(() => {
+        //... voer dingen uit
+        const fetchDataRecipePage = async () => {
+            toggleError(false);
+            toggleLoading(true);
+
+            // Try block
+            try {
+                // Response van request opslaan
+                const response = await axios.get(`${URI}${endpoint}`, {
+
+                    params: {
+                        id: id,
+                        type: 'public',
+                        app_id: API_ID,
+                        app_key: API_KEY,
+                    }
+
+                });
+                console.log(response.data.recipe);
+                setRecipeInfo(response.data.recipe);
+
+                // Catch block
+            } catch (err) {
+                console.error(err)
+                toggleError(true);
+            }
+        }
+
+        fetchDataRecipePage();
+        toggleLoading(false);
+
+    }, []);
 
     return (
         <>

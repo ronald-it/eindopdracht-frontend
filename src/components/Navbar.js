@@ -6,7 +6,7 @@ import {NavHashLink} from "react-router-hash-link";
 export function Navbar() {
     return (
         <div className="title-and-navbar">
-            <Link className="clueless-cook-link" to="/" exact>
+            <Link className="clueless-cook-link" to="/">
                 <h2 className="page-title">The Clueless Cook</h2>
             </Link>
             <nav>
