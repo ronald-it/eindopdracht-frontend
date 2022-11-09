@@ -42,6 +42,7 @@ export function Recipepage() {
                 });
                 console.log(response.data.recipe);
                 setRecipeInfo(response.data.recipe);
+                console.log(response.data.recipe.ingredients);
 
                 // Catch block
             } catch (err) {
@@ -66,10 +67,10 @@ export function Recipepage() {
                     {/*<!--Recept titel, bereidingsduur en klok icon-->*/}
 
                     <div className="title-and-time-image">
-                        <h3 className="recipe-name">Recipe Name Here</h3>
+                        <h3 className="recipe-name">{recipeInfo.label}</h3>
                         <div className="time-image-div-recipe">
                             <img className="time-image-recipe" src={klokje} alt="time"/>
-                                <p className="time-text-recipe-number">20 </p>
+                                <p className="time-text-recipe-number">{recipeInfo.totalTime} </p>
                                 <p className="time-text-recipe-minutes">min.</p>
                         </div>
                     </div>
@@ -96,8 +97,8 @@ export function Recipepage() {
                         </div>
                         <div className="recipe-picture">
                             <img className="recipe-image"
-                                 src="https://www.giallozafferano.com/images/228-22832/spaghetti-with-tomato-sauce_1200x800.jpg"
-                                 alt="spaghetti"/>
+                                 src={recipeInfo.image}
+                                 alt={recipeInfo.label}/>
                         </div>
                     </div>
 
@@ -108,55 +109,50 @@ export function Recipepage() {
                             <h4 className="recipe-ingredients-title">Ingredients</h4>
                             <br/>
                                 <ul className="ingredients-ul">
-                                    <li>1/4 Pellentesque condimentum quam</li>
-                                    <li>1 Phasellus sit amet</li>
-                                    <li>1 In posuere nisi</li>
-                                    <li>1/2 Nunc mattis mauris id massa</li>
-                                    <li>4 Pellentesque condimentum quam</li>
-                                    <li>1 Ut malesuada diam</li>
-                                    <li>1/4 Phasellus efficitur</li>
-                                    <li>2 Cras non elit id ipsum fermentum</li>
+                                    {Object.keys(recipeInfo).length > 0 && recipeInfo.ingredients.map((ingredient) => {
+                                        return <li key={ingredient.text}>{ingredient.text}</li>
+                                    })}
                                 </ul>
                         </div>
                         <div className="recipe-nutrients">
                             <h4 className="recipe-nutrients-title">Nutrients</h4>
                             <div className="recipe-nutrients-table">
-                                <table>
+                                {Object.keys(recipeInfo).length > 0 && <table>
                                     <thead>
                                     </thead>
                                     <tbody>
                                     <tr>
                                         <td>Energy</td>
-                                        <td>1080</td>
+                                        <td>{Math.round(recipeInfo.totalNutrients.ENERC_KCAL.quantity)}</td>
                                         <td>kcal</td>
                                     </tr>
                                     <tr>
                                         <td>Fat</td>
-                                        <td>80</td>
+                                        <td>{Math.round(recipeInfo.totalNutrients.FAT.quantity)}</td>
                                         <td>g</td>
                                     </tr>
                                     <tr>
                                         <td>Carbs</td>
-                                        <td>56</td>
+                                        <td>{Math.round(recipeInfo.totalNutrients.CHOCDF.quantity)}</td>
                                         <td>g</td>
                                     </tr>
                                     <tr>
                                         <td>Sugar</td>
-                                        <td>20</td>
+                                        <td>{Math.round(recipeInfo.totalNutrients.SUGAR.quantity)}</td>
                                         <td>g</td>
                                     </tr>
                                     <tr>
                                         <td>Protein</td>
-                                        <td>15</td>
+                                        <td>{Math.round(recipeInfo.totalNutrients.PROCNT.quantity)}</td>
                                         <td>g</td>
                                     </tr>
                                     <tr>
                                         <td>Sodium</td>
-                                        <td>1900</td>
+                                        <td>{Math.round(recipeInfo.totalNutrients.NA.quantity)}</td>
                                         <td>mg</td>
                                     </tr>
                                     </tbody>
-                                </table>
+                                </table>}
                             </div>
                         </div>
                     </div>
@@ -166,14 +162,9 @@ export function Recipepage() {
                     <div className="recipe-health-labels-div">
                         <h4 className="recipe-health-labels-title">Health labels</h4>
                         <div className="recipe-health-labels">
-                            <p>Peanut-Free</p>
-                            <p>Kidney-Friendly</p>
-                            <p>Egg-Free</p>
-                            <p>Peanut-Free</p>
-                            <p>Soy-Free</p>
-                            <p>Fish Free</p>
-                            <p>Shellfish-Free</p>
-                            <p>Tree-Nut-Free</p>
+                            {Object.keys(recipeInfo).length > 0 && recipeInfo.healthLabels.map((healthLabel) => {
+                                return <p key={healthLabel}>{healthLabel}</p>
+                            })}
                         </div>
                     </div>
                 </div>
