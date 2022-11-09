@@ -303,7 +303,7 @@ export function Homepage() {
 
                             {error &&
                                 <span className="ingredient-error">
-                                    Er is iets misgegaan met het ophalen van de data, probeer het opnieuw.
+                                    Something went wrong during the retrieval of the data, please refresh the page.
                                 </span>
                             }
 

@@ -59,6 +59,14 @@ export function Recipepage() {
     return (
         <>
 
+            {error &&
+                <span className="recipe-error">
+                                    Something went wrong during the retrieval of the data, please refresh the page.
+                                </span>
+            }
+
+            {loading && <span>Loading...</span>}
+
             {/*<!--Main-->*/}
 
             <main className="outer-container-main-recipe">
