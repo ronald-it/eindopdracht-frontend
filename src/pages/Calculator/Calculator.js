@@ -16,12 +16,14 @@ export function Calculator() {
     const [foodInput, setFoodInput] = useState('');
 
     const [foods, setFoods] = useState([]);
+
     const [foodCalculator, setFoodCalculator] = useState([]);
 
-    const [servingSizeArray, setServingSizeArray] = useState([]);
     const [servingSize, setServingSize] = useState(0);
 
-    const [totalArray, setTotalArray] = useState([]);
+    const [totalCalories, setTotalCalories] = useState(0);
+    const [totalFat, setTotalFat] = useState(0);
+    const [totalCarbs, setTotalCarbs] = useState(0);
 
     // Fetch data functie om de gegeven op te halen voor de eerste tabel op calculator page
     const fetchDataCalculatorSearch = async (product) => {
@@ -49,19 +51,14 @@ export function Calculator() {
     }
 
     useEffect(() => {
-        console.log(foods)
-        //... voer dingen uit
-    }, [foods]);
-
-    useEffect(() => {
         console.log(foodCalculator)
         //... voer dingen uit
     }, [foodCalculator]);
 
     useEffect(() => {
-        console.log(totalArray)
+        console.log(totalCalories)
         //... voer dingen uit
-    }, [totalArray]);
+    }, [totalCalories]);
 
     return (
         <>
@@ -129,10 +126,32 @@ export function Calculator() {
                             id="submit-form-calculator-add"
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                setFoodCalculator([...foodCalculator, foods]);
+
+                                setTotalCalories(0);
+                                setTotalFat(0);
+                                setTotalCarbs(0);
+
+                                setFoodCalculator([...foodCalculator, [foods, servingSize]]);
+
+                                foodCalculator.map((array) => {
+                                    array[0].map((entry) => {
+                                        return setTotalCalories(...totalCalories, Math.round(entry.nutrients.ENERC_KCAL) * array[1])
+                                    })
+                                })
+
+                                foodCalculator.map((array) => {
+                                    array[0].map((entry) => {
+                                        return setTotalFat(...totalFat, Math.round(entry.nutrients.FAT) * array[1])
+                                    })
+                                })
+
+                                foodCalculator.map((array) => {
+                                    array[0].map((entry) => {
+                                        return setTotalCarbs(...totalCarbs, Math.round(entry.nutrients.CHOCDF) * array[1])
+                                    })
+                                })
+
                                 setFoods([]);
-                                setServingSizeArray([...servingSizeArray, servingSize]);
-                                setTotalArray([...totalArray, foodCalculator, servingSizeArray]);
                             }}
                         >
                             <label htmlFor="amount-calculator">Amount
@@ -165,16 +184,24 @@ export function Calculator() {
                                 <td>Fat</td>
                                 <td>Carbs</td>
                             </tr>
-                            {foodCalculator.length > 0 && foodCalculator.map((entry) => {
-                                return entry.map((product) => {
-                                    return <tr key={product.foodId} className="row-two-calculation">
-                                        <td>{product.label}</td>
-                                        <td>{Math.round(product.nutrients.ENERC_KCAL)*servingSize}</td>
-                                        <td>{Math.round(product.nutrients.FAT)*servingSize}</td>
-                                        <td>{Math.round(product.nutrients.CHOCDF)*servingSize}</td>
-                                    </tr>
+                            {foodCalculator.length > 0 &&
+                                foodCalculator.map((array) => {
+                                    return array[0].map((entry) => {
+                                        return <tr key={entry.foodId} className="row-two-calculation">
+                                            <td>{entry.label}</td>
+                                            <td>{Math.round(entry.nutrients.ENERC_KCAL) * array[1]}</td>
+                                            <td>{Math.round(entry.nutrients.FAT) * array[1]}</td>
+                                            <td>{Math.round(entry.nutrients.CHOCDF) * array[1]}</td>
+                                        </tr>
+                                    })
                                 })
-                            })}
+                            }
+                            {foodCalculator.length > 0 && <tr id="total-row">
+                                <td>Total</td>
+                                <td>X</td>
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>}
                             </tbody>
                         </table>
                     </div>
