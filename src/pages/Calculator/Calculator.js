@@ -1,8 +1,68 @@
 import * as React from 'react';
 import './Calculator.css';
 import magnifier from '../../assets/icons/search.png';
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export function Calculator() {
+
+    //Opslaan van URI en endpoint
+    const URI = 'https://api.edamam.com';
+    const endpoint = '/api/food-database/v2/parser';
+    const API_ID = 'ec73a27a';
+    const API_KEY = '270cc5a42e9022d3b8f92f30feed3e6e';
+
+    //Initialiseren van useState
+    const [foodInput, setFoodInput] = useState('');
+
+    const [foods, setFoods] = useState([]);
+    const [foodCalculator, setFoodCalculator] = useState([]);
+
+    const [servingSizeArray, setServingSizeArray] = useState([]);
+    const [servingSize, setServingSize] = useState(0);
+
+    const [totalArray, setTotalArray] = useState([]);
+
+    // Fetch data functie om de gegeven op te halen voor de eerste tabel op calculator page
+    const fetchDataCalculatorSearch = async (product) => {
+
+        // Try block
+
+        try {
+            // Response van request opslaan
+            const response = await axios.get(`${URI}${endpoint}`, {
+                params: {
+                    type: 'public',
+                    app_id: API_ID,
+                    app_key: API_KEY,
+                    ingr: product
+                    // upc: product ? product : null
+                }
+            });
+            console.log(response);
+            setFoods([...foods, response.data.parsed[0].food]);
+
+            // Catch block
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    useEffect(() => {
+        console.log(foods)
+        //... voer dingen uit
+    }, [foods]);
+
+    useEffect(() => {
+        console.log(foodCalculator)
+        //... voer dingen uit
+    }, [foodCalculator]);
+
+    useEffect(() => {
+        console.log(totalArray)
+        //... voer dingen uit
+    }, [totalArray]);
+
     return (
         <>
             {/*Main*/}
@@ -13,11 +73,24 @@ export function Calculator() {
                     {/*Searchbar calculator*/}
 
                     <div className="search-bar-div-calculator">
-                        <form id="submit-form-calculator-search">
+                        <form
+                            id="submit-form-calculator-search"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                fetchDataCalculatorSearch(foodInput);
+                            }
+                            }
+                        >
                             <label htmlFor="search-bar-calculator">
-                                <input className="search-bar-input-calculator" type="text"
+                                <input className="search-bar-input-calculator"
+                                       type="text"
                                        placeholder="Barcode / product"
-                                       minLength="1" id="search-bar-calculator" name="barcode-or-product"/>
+                                       minLength="1"
+                                       id="search-bar-calculator"
+                                       name="barcode-or-product"
+                                       value={foodInput}
+                                       onChange={(e) => setFoodInput(e.target.value)}
+                                />
                             </label>
                             <button id="magnifying-glass-calculator" type="button">
                                 <img className="search-icon-calculator" src={magnifier} alt="search icon"/>
@@ -38,6 +111,13 @@ export function Calculator() {
                                 <td>Quantity</td>
                                 <td>Label</td>
                             </tr>
+                            {foods.length > 0 && foods.map((entry) => {
+                                return <tr key={entry.foodId} className="row-two-product">
+                                    <td>{entry.label}</td>
+                                    <td>100</td>
+                                    <td>Gram</td>
+                                </tr>
+                            })}
                             </tbody>
                         </table>
                     </div>
@@ -45,10 +125,26 @@ export function Calculator() {
                     {/*Portie grootte input veld*/}
 
                     <div className="amount-div-calculator">
-                        <form id="submit-form-calculator-add">
+                        <form
+                            id="submit-form-calculator-add"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                setFoodCalculator([...foodCalculator, foods]);
+                                setFoods([]);
+                                setServingSizeArray([...servingSizeArray, servingSize]);
+                                setTotalArray([...totalArray, foodCalculator, servingSizeArray]);
+                            }}
+                        >
                             <label htmlFor="amount-calculator">Amount
-                                <input className="amount-input-calculator" type="text"
-                                       minLength="1" id="amount-calculator" name="amount-of-product"/>
+                                <input
+                                    className="amount-input-calculator"
+                                    type="text"
+                                    minLength="1"
+                                    id="amount-calculator"
+                                    name="amount-of-product"
+                                    value={servingSize}
+                                    onChange={(e) => setServingSize(e.target.value)}
+                                />
                             </label>
                             <label htmlFor="add-button-calculator">Serving(s)
                                 <button id="add-button-calculator" type="submit">
@@ -69,6 +165,16 @@ export function Calculator() {
                                 <td>Fat</td>
                                 <td>Carbs</td>
                             </tr>
+                            {foodCalculator.length > 0 && foodCalculator.map((entry) => {
+                                return entry.map((product) => {
+                                    return <tr key={product.foodId} className="row-two-calculation">
+                                        <td>{product.label}</td>
+                                        <td>{Math.round(product.nutrients.ENERC_KCAL)*servingSize}</td>
+                                        <td>{Math.round(product.nutrients.FAT)*servingSize}</td>
+                                        <td>{Math.round(product.nutrients.CHOCDF)*servingSize}</td>
+                                    </tr>
+                                })
+                            })}
                             </tbody>
                         </table>
                     </div>
