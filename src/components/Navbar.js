@@ -36,6 +36,11 @@ export function Navbar() {
                             Registration
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/" exact>
+                            Logout
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </div>
