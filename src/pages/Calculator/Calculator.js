@@ -50,36 +50,6 @@ export function Calculator() {
         }
     }
 
-    useEffect(() => {
-        console.log(foodCalculator)
-        //... voer dingen uit
-        foodCalculator.map((array) => {
-            array[0].map((entry) => {
-                return console.log(entry.nutrients.ENERC_KCAL)
-            })
-        })
-
-        foodCalculator.map((array) => {
-            console.log(array[1])
-            array[0].map((entry) => {
-                return console.log(entry.nutrients.FAT)
-            })
-        })
-
-        foodCalculator.map((array) => {
-            array[0].map((entry) => {
-                return console.log(entry.nutrients.CHOCDF)
-            })
-        })
-
-
-    }, [foodCalculator]);
-
-    useEffect(() => {
-        console.log(totalCalories)
-        //... voer dingen uit
-    }, [totalCalories]);
-
     return (
         <>
             {/*Main*/}
@@ -146,30 +116,19 @@ export function Calculator() {
                             id="submit-form-calculator-add"
                             onSubmit={(e) => {
                                 e.preventDefault();
-
-                                setTotalCalories(0);
-                                setTotalFat(0);
-                                setTotalCarbs(0);
-
                                 setFoodCalculator([...foodCalculator, [foods, servingSize]]);
 
-                                foodCalculator.map((array) => {
-                                    array[0].map((entry) => {
-                                        setTotalCalories(...totalCalories, entry.nutrients.ENERC_KCAL * array[1])
-                                    })
-                                })
+                                let newCalories = 0;
+                                Object.values(foods).map((entry) => newCalories += entry.nutrients.ENERC_KCAL*servingSize);
+                                setTotalCalories(totalCalories => totalCalories + newCalories);
 
-                                foodCalculator.map((array) => {
-                                    array[0].map((entry) => {
-                                        setTotalFat(...totalFat, entry.nutrients.FAT * array[1])
-                                    })
-                                })
+                                let newFat = 0;
+                                Object.values(foods).map((entry) => newFat += entry.nutrients.FAT*servingSize);
+                                setTotalFat(totalFat => totalFat + newFat);
 
-                                foodCalculator.map((array) => {
-                                    array[0].map((entry) => {
-                                        setTotalCarbs(...totalCarbs, entry.nutrients.CHOCDF * array[1])
-                                    })
-                                })
+                                let newCarbs = 0;
+                                Object.values(foods).map((entry) => newCarbs += entry.nutrients.CHOCDF*servingSize);
+                                setTotalCarbs(totalCarbs => totalCarbs + newCarbs);
 
                                 setFoods([]);
                             }}
@@ -209,18 +168,18 @@ export function Calculator() {
                                     return array[0].map((entry) => {
                                         return <tr key={entry.foodId} className="row-two-calculation">
                                             <td>{entry.label}</td>
-                                            <td>{Math.round(entry.nutrients.ENERC_KCAL) * array[1]}</td>
-                                            <td>{Math.round(entry.nutrients.FAT) * array[1]}</td>
-                                            <td>{Math.round(entry.nutrients.CHOCDF) * array[1]}</td>
+                                            <td>{Math.round(entry.nutrients.ENERC_KCAL * array[1])}</td>
+                                            <td>{Math.round(entry.nutrients.FAT * array[1])}</td>
+                                            <td>{Math.round(entry.nutrients.CHOCDF * array[1])}</td>
                                         </tr>
                                     })
                                 })
                             }
                             {foodCalculator.length > 0 && <tr id="total-row">
                                 <td>Total</td>
-                                <td>X</td>
-                                <td>X</td>
-                                <td>X</td>
+                                <td>{Math.round(totalCalories)}</td>
+                                <td>{Math.round(totalFat)}</td>
+                                <td>{Math.round(totalCarbs)}</td>
                             </tr>}
                             </tbody>
                         </table>
