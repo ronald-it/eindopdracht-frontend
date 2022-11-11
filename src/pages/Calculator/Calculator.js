@@ -53,6 +53,26 @@ export function Calculator() {
     useEffect(() => {
         console.log(foodCalculator)
         //... voer dingen uit
+        foodCalculator.map((array) => {
+            array[0].map((entry) => {
+                return console.log(entry.nutrients.ENERC_KCAL)
+            })
+        })
+
+        foodCalculator.map((array) => {
+            console.log(array[1])
+            array[0].map((entry) => {
+                return console.log(entry.nutrients.FAT)
+            })
+        })
+
+        foodCalculator.map((array) => {
+            array[0].map((entry) => {
+                return console.log(entry.nutrients.CHOCDF)
+            })
+        })
+
+
     }, [foodCalculator]);
 
     useEffect(() => {
@@ -135,19 +155,19 @@ export function Calculator() {
 
                                 foodCalculator.map((array) => {
                                     array[0].map((entry) => {
-                                        return setTotalCalories(...totalCalories, Math.round(entry.nutrients.ENERC_KCAL) * array[1])
+                                        setTotalCalories(...totalCalories, entry.nutrients.ENERC_KCAL * array[1])
                                     })
                                 })
 
                                 foodCalculator.map((array) => {
                                     array[0].map((entry) => {
-                                        return setTotalFat(...totalFat, Math.round(entry.nutrients.FAT) * array[1])
+                                        setTotalFat(...totalFat, entry.nutrients.FAT * array[1])
                                     })
                                 })
 
                                 foodCalculator.map((array) => {
                                     array[0].map((entry) => {
-                                        return setTotalCarbs(...totalCarbs, Math.round(entry.nutrients.CHOCDF) * array[1])
+                                        setTotalCarbs(...totalCarbs, entry.nutrients.CHOCDF * array[1])
                                     })
                                 })
 
