@@ -11,7 +11,6 @@ export function Registration() {
     const [role, setRole] = useState('');
 
     const [error, toggleError] = useState(false);
-    const [loading, toggleLoading] = useState(false);
     const [succes, toggleSucces] = useState(false);
     const [errorText, setErrorText] = useState('');
     const [registrationText, setRegistrationText] = useState('');
@@ -129,7 +128,7 @@ export function Registration() {
                     />
 
                     <label
-                        htmlFor="password"
+                        htmlFor="role"
                     >
                         Role
                     </label>
