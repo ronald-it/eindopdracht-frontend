@@ -24,7 +24,7 @@
     width: 400px;
 }
 
-#registration-form input {
+#registration-form input, select {
     margin-top: 5px;
     margin-bottom: 1em;
     padding: 9px;
@@ -39,4 +39,14 @@
     background-color: #70b6be;
     color: #283E53;
     font-weight: bold;
+}
+
+.registration-error {
+    font-weight: bolder;
+    color: red;
+}
+
+.registration-succes {
+    font-weight: bolder;
+    color: green;
 }

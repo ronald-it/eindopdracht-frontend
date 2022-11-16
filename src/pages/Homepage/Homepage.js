@@ -28,7 +28,6 @@ export function Homepage() {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
-    const [errorCarousel, toggleErrorCarousel] = useState(false);
     const [loadingCarousel, toggleLoadingCarousel] = useState(false);
 
     const [randomizer, setRandomizer] = useState(0)
@@ -76,7 +75,6 @@ export function Homepage() {
     useEffect(() => {
         //... voer dingen uit
         const fetchDataCarousel = async () => {
-            toggleErrorCarousel(false);
             toggleLoadingCarousel(true);
 
             // Try block
@@ -98,7 +96,6 @@ export function Homepage() {
                 // Catch block
             } catch (err) {
                 console.error(err)
-                toggleErrorCarousel(true);
             }
         }
 
