@@ -2,8 +2,11 @@ import * as React from 'react';
 import {Link, NavLink} from "react-router-dom";
 import './Navbar.css';
 import {NavHashLink} from "react-router-hash-link";
+import {AuthContext} from "../context/AuthContext";
 
 export function Navbar() {
+    const {authorization, userLogout} = React.useContext(AuthContext);
+
     return (
         <div className="title-and-navbar">
             <Link className="clueless-cook-link" to="/">
@@ -26,21 +29,25 @@ export function Navbar() {
                             Calculator
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/login">
-                            Login
+                    {authorization === false && <li>
+                        <NavLink to="/login"
+                        >
+                            Log in
                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/registration">
-                            Registration
+                    </li>}
+                    {authorization === true && <li>
+                        <NavLink to="/" exact
+                                 onClick={() => userLogout}
+                        >
+                            Log out
                         </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/" exact>
-                            Logout
+                    </li>}
+                    {authorization === false && <li>
+                        <NavLink to="/registration"
+                        >
+                            Register
                         </NavLink>
-                    </li>
+                    </li>}
                 </ul>
             </nav>
         </div>

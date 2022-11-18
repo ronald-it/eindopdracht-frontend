@@ -3,8 +3,12 @@ import './Login.css';
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {AuthContext} from "../../context/AuthContext";
 
 export function Login() {
+
+    const {userLogin} = React.useContext(AuthContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -27,6 +31,8 @@ export function Login() {
                 }
             );
             console.log(response);
+            console.log(response.data.accessToken);
+            userLogin(response.data.accessToken);
         } catch (err) {
             console.log(err.response.data.message);
             toggleError(true);
