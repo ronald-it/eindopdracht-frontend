@@ -1,0 +1,9 @@
+.div-private-route {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.text-align-private-route {
+    margin-top: 20em;
+}

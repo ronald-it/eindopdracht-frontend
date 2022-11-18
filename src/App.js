@@ -9,11 +9,16 @@ import {
     Switch,
     Route,
 } from 'react-router-dom';
-import {Navbar} from "./components/Navbar";
+import {Navbar} from "./components/Navbar/Navbar";
 import './assets/fonts/fonts.css';
-import {Footer} from "./components/Footer";
+import {Footer} from "./components/Footer/Footer";
+import {AuthContext} from "./context/AuthContext";
+import * as React from 'react';
+import {PrivateRoute} from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
+    const {authorization} = React.useContext(AuthContext);
+
     return (
         <>
             <div className="content-container">
@@ -25,9 +30,9 @@ function App() {
                     <Route path="/recipe/:id">
                         <Recipepage/>
                     </Route>
-                    <Route path="/calculator">
-                        <Calculator/>
-                    </Route>
+                    <PrivateRoute path="/calculator" authorization={authorization}>
+                        <Calculator />
+                    </PrivateRoute>
                     <Route path="/login">
                         <Login/>
                     </Route>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Link, NavLink} from "react-router-dom";
 import './Navbar.css';
 import {NavHashLink} from "react-router-hash-link";
-import {AuthContext} from "../context/AuthContext";
+import {AuthContext} from "../../context/AuthContext";
 
 export function Navbar() {
     const {authorization, userLogout} = React.useContext(AuthContext);
