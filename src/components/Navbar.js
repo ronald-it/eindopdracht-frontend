@@ -37,7 +37,7 @@ export function Navbar() {
                     </li>}
                     {authorization === true && <li>
                         <NavLink to="/" exact
-                                 onClick={() => userLogout}
+                                 onClick={userLogout}
                         >
                             Log out
                         </NavLink>
