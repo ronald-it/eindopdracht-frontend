@@ -6,8 +6,12 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import {useEffect, useState} from "react";
 import magnifier from "../../assets/icons/search.png"
+import {AuthContext} from "../../context/AuthContext";
 
 export function Homepage() {
+
+    const {authorization} = React.useContext(AuthContext);
+
     //Opslaan van URI en endpoint
     const URI = 'https://api.edamam.com';
     const endpoint = '/api/recipes/v2';
@@ -27,6 +31,7 @@ export function Homepage() {
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
+    const [invalidInput, setInvalidInput] = useState(false);
 
     const [loadingCarousel, toggleLoadingCarousel] = useState(false);
 
@@ -40,6 +45,7 @@ export function Homepage() {
     const fetchDataHome = async (ingredient, mealType, cuisineType, diet, time) => {
         toggleError(false);
         toggleLoading(true);
+        setInvalidInput(false);
 
         // Try block
         try {
@@ -62,6 +68,9 @@ export function Homepage() {
 
             setRecipes(response.data.hits);
             console.log(response.data.hits);
+            if (response.data.hits.length === 0) {
+                setInvalidInput(true);
+            }
 
             // Catch block
         } catch (err) {
@@ -220,7 +229,7 @@ export function Homepage() {
 
                     <div className="outer-container-searchbar">
                         <div className="inner-container-searchbar">
-                            <form id="submit-form" onSubmit={(e) => {
+                            {authorization === true ? <form id="submit-form" onSubmit={(e) => {
                                 e.preventDefault();
                                 fetchDataHome(ingredient, mealType, cuisine, diet, time);
                             }
@@ -289,7 +298,12 @@ export function Homepage() {
                                     <option value="60+">60 or more</option>
                                 </select>
                                 <button type="submit" id="search-button">Search</button>
-                            </form>
+                            </form> : <div className="div-private-search-bar">
+                                <p className="text-align-private-search-bar">
+                                    This content is only available for logged in users.
+                                </p>
+                            </div>
+                            }
                         </div>
                     </div>
 
@@ -305,6 +319,8 @@ export function Homepage() {
                             }
 
                             {loading && <span>Loading...</span>}
+
+                            {Object.keys(recipes).length === 0 && invalidInput && <p>Your input has not lead to any recipe results, please try again</p>}
 
                             {Object.keys(recipes).length > 0 && recipes.map((entry) => {
                                 return <Link to={`/recipe/${entry.recipe.uri.split("_")[1]}`} id="recipe-link"

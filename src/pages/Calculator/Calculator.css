@@ -92,6 +92,11 @@
     align-items: center;
 }
 
+.invalid-product, .invalid-serving-size {
+    color: red;
+    font-weight: bold;
+}
+
 .calorie-calculator-product-table-div {
     /*border: 3px solid blue;*/
     margin-bottom: 3em;

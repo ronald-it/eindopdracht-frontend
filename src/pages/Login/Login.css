@@ -12,6 +12,11 @@
     margin-bottom: 1em;
 }
 
+.invalid-user-or-pass {
+    color: red;
+    font-weight: bold;
+}
+
 #login-form {
     display: flex;
     flex-direction: column;

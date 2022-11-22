@@ -25,8 +25,12 @@ export function Calculator() {
     const [totalFat, setTotalFat] = useState(0);
     const [totalCarbs, setTotalCarbs] = useState(0);
 
+    const [invalidProduct, setInvalidProduct] = useState(false);
+    const [invalidServingSize, setInvalidServingSize] = useState(false);
+
     // Fetch data functie om de gegeven op te halen voor de eerste tabel op calculator page
     const fetchDataCalculatorSearch = async (product) => {
+        setInvalidProduct(false);
 
         // Try block
 
@@ -47,6 +51,7 @@ export function Calculator() {
             // Catch block
         } catch (err) {
             console.error(err)
+            setInvalidProduct(true);
         }
     }
 
@@ -88,6 +93,8 @@ export function Calculator() {
 
                     {/*Eerste tabel calculator page*/}
 
+                    {invalidProduct && <p className="invalid-product">Your input did not match with any products in the database, please change your input.</p>}
+
                     <div className="calorie-calculator-product-table-div" id="calorie-calculator-product-table-div">
                         <table className="calorie-calculator-product-table">
                             <thead>
@@ -116,21 +123,26 @@ export function Calculator() {
                             id="submit-form-calculator-add"
                             onSubmit={(e) => {
                                 e.preventDefault();
-                                setFoodCalculator([...foodCalculator, [foods, servingSize]]);
+                                if (servingSize > 0) {
+                                    setFoodCalculator([...foodCalculator, [foods, servingSize]]);
 
-                                let newCalories = 0;
-                                Object.values(foods).map((entry) => newCalories += entry.nutrients.ENERC_KCAL*servingSize);
-                                setTotalCalories(totalCalories => totalCalories + newCalories);
+                                    let newCalories = 0;
+                                    Object.values(foods).map((entry) => newCalories += entry.nutrients.ENERC_KCAL*servingSize);
+                                    setTotalCalories(totalCalories => totalCalories + newCalories);
 
-                                let newFat = 0;
-                                Object.values(foods).map((entry) => newFat += entry.nutrients.FAT*servingSize);
-                                setTotalFat(totalFat => totalFat + newFat);
+                                    let newFat = 0;
+                                    Object.values(foods).map((entry) => newFat += entry.nutrients.FAT*servingSize);
+                                    setTotalFat(totalFat => totalFat + newFat);
 
-                                let newCarbs = 0;
-                                Object.values(foods).map((entry) => newCarbs += entry.nutrients.CHOCDF*servingSize);
-                                setTotalCarbs(totalCarbs => totalCarbs + newCarbs);
+                                    let newCarbs = 0;
+                                    Object.values(foods).map((entry) => newCarbs += entry.nutrients.CHOCDF*servingSize);
+                                    setTotalCarbs(totalCarbs => totalCarbs + newCarbs);
 
-                                setFoods([]);
+                                    setFoods([]);
+                                    setInvalidServingSize(false);
+                                } else {
+                                    setInvalidServingSize(true);
+                                }
                             }}
                         >
                             <label htmlFor="amount-calculator">Amount
@@ -153,6 +165,8 @@ export function Calculator() {
                     </div>
 
                     {/*Calculator tabel*/}
+
+                    {invalidServingSize && <p className="invalid-serving-size">Please fill in a serving size of 1 or higher.</p>}
 
                     <div className="calorie-calculator-calculation-table-div">
                         <table className="calorie-calculator-calculation-table">

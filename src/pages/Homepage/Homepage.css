@@ -238,6 +238,12 @@
 }
 
 /* --------------- 4.3 Search bar ------------- */
+
+.text-align-private-search-bar {
+    color: white;
+    font-weight: bolder;
+}
+
 .outer-container-searchbar {
     /*border: 3px solid red;*/
     background-color: #283E53;

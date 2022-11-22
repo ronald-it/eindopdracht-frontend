@@ -46,6 +46,8 @@ export function Login() {
 
                 <p>You can log into your account down below</p>
 
+                {error && <p className="invalid-user-or-pass">The username/password combination is incorrect, please try again.</p>}
+
                 <form
                     id="login-form"
                     onSubmit={(e) => {

@@ -8,7 +8,6 @@ export function Registration() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
 
     const [error, toggleError] = useState(false);
     const [succes, toggleSucces] = useState(false);
@@ -24,9 +23,6 @@ export function Registration() {
     useEffect(() => {
         console.log(password)
     }, [password])
-    useEffect(() => {
-        console.log(role)
-    }, [role])
 
     const postDataRegistration = async () => {
         toggleError(false);
@@ -75,11 +71,11 @@ export function Registration() {
                         e.preventDefault();
                         toggleSucces(false);
                         toggleError(false);
-                        if (email.includes("@") === true && username.length > 5 && password.length > 5 && role.length > 0) {
+                        if (email.includes("@") === true && username.length > 5 && password.length > 5) {
                             postDataRegistration();
                         } else {
                             toggleError(true);
-                            setErrorText('Your input is invalid. The username and password length must be at least 6 characters and a role must be selected. Also, make sure your e-mail address contains the @ character.')
+                            setErrorText('Your input is invalid. The username and password length must be at least 6 characters. Also, make sure your e-mail address contains the @ character.')
                         }
                     }
                 }
@@ -126,22 +122,6 @@ export function Registration() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-
-                    <label
-                        htmlFor="role"
-                    >
-                        Role
-                    </label>
-                    <select
-                        name="role"
-                        id="role"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value)}
-                    >
-                        <option value=""></option>
-                        <option value="user">User</option>
-                        <option value="admin">Admin</option>
-                    </select>
 
                     <button type="submit">
                         Register
