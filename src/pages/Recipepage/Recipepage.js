@@ -5,22 +5,23 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
-//Declare variables for URI, API ID and API Key
+// Declare variables for URI, API ID and API Key
 const URI = 'https://api.edamam.com';
 const API_ID = '44920bbe';
 const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
 
 export function Recipepage() {
-    //Recipe ID
+    // Recipe ID
     const { id } = useParams();
-    //Declare endpoint variable
+    // Declare endpoint variable
     const endpoint = `/api/recipes/v2/${id}`;
 
-    //Initialize useState
+    // Initialize useState
     const [recipeInfo, setRecipeInfo] = useState([]);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
+    // Recipe page info function
     useEffect(() => {
         const fetchDataRecipePage = async () => {
             toggleError(false);

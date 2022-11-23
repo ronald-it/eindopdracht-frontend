@@ -4,7 +4,7 @@ import magnifier from '../../assets/icons/search.png';
 import {useState} from "react";
 import axios from "axios";
 
-//Declare variables for URI, endpoint, API ID and API Key
+// Declare variables for URI, endpoint, API ID and API Key
 const URI = 'https://api.edamam.com';
 const endpoint = '/api/food-database/v2/parser';
 const API_ID = 'ec73a27a';
@@ -12,19 +12,14 @@ const API_KEY = '270cc5a42e9022d3b8f92f30feed3e6e';
 
 export function Calculator() {
 
-    //Initialize useState
+    // Initialize useState
     const [foodInput, setFoodInput] = useState('');
-
     const [foods, setFoods] = useState([]);
-
     const [foodCalculator, setFoodCalculator] = useState([]);
-
     const [servingSize, setServingSize] = useState(0);
-
     const [totalCalories, setTotalCalories] = useState(0);
     const [totalFat, setTotalFat] = useState(0);
     const [totalCarbs, setTotalCarbs] = useState(0);
-
     const [invalidProduct, setInvalidProduct] = useState(false);
     const [invalidServingSize, setInvalidServingSize] = useState(false);
 

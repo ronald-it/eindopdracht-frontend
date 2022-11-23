@@ -2,18 +2,20 @@ import * as React from 'react';
 import './Registration.css';
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 export function Registration() {
+
+    // Initialize useState
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const [error, toggleError] = useState(false);
     const [succes, toggleSucces] = useState(false);
     const [errorText, setErrorText] = useState('');
     const [registrationText, setRegistrationText] = useState('');
 
+    // Registration function
     const postDataRegistration = async () => {
         toggleError(false);
         toggleSucces(false);

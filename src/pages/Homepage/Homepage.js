@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import magnifier from "../../assets/icons/search.png"
 import {AuthContext} from "../../context/AuthContext";
 
-//Declare variables for URI, endpoint, API ID and API Key
+// Declare variables for URI, endpoint, API ID and API Key
 const URI = 'https://api.edamam.com';
 const endpoint = '/api/recipes/v2';
 const API_ID = '44920bbe';
@@ -16,10 +16,10 @@ const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
 
 export function Homepage() {
 
+    // Declare useContext variable
     const {authorization} = React.useContext(AuthContext);
 
-    //Initialize useState
-
+    // Initialize useState
     const [ingredient, setIngredient] = useState('');
     const [mealType, setMealType] = useState('');
     const [cuisine, setCuisine] = useState('');
@@ -38,12 +38,13 @@ export function Homepage() {
 
     const [randomizer, setRandomizer] = useState(0)
 
-    //Use of setRandomizer to create a number in de Randomizer state
+    // Use of setRandomizer to create a number in de Randomizer state
 
     useEffect(() => {
         setRandomizer(Math.round(Math.random() * 17));
     }, []);
 
+    // Searchbar function
     const fetchDataHome = async (ingredient, mealType, cuisineType, diet, time) => {
         toggleError(false);
         toggleLoading(true);
@@ -78,6 +79,7 @@ export function Homepage() {
         toggleLoading(false);
     }
 
+    // Carousel function
     useEffect(() => {
         const fetchDataCarousel = async () => {
             toggleLoadingCarousel(true);
@@ -351,7 +353,6 @@ export function Homepage() {
                                     </div>
                                 </Link>
                             })}
-
                         </div>
                     </div>
                 </div>

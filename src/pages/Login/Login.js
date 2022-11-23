@@ -1,19 +1,21 @@
 import * as React from 'react';
 import './Login.css';
 import {Link} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 
 export function Login() {
 
+    // Declare useContext variable
     const {userLogin} = React.useContext(AuthContext);
 
+    // Initialize useState
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
     const [error, toggleError] = useState(false);
 
+    // Login function
     const postDataLogin = async () => {
         toggleError(false);
         try {
