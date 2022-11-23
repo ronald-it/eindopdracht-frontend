@@ -14,16 +14,6 @@ export function Registration() {
     const [errorText, setErrorText] = useState('');
     const [registrationText, setRegistrationText] = useState('');
 
-    useEffect(() => {
-        console.log(username)
-    }, [username])
-    useEffect(() => {
-        console.log(email)
-    }, [email])
-    useEffect(() => {
-        console.log(password)
-    }, [password])
-
     const postDataRegistration = async () => {
         toggleError(false);
         toggleSucces(false);
@@ -36,11 +26,9 @@ export function Registration() {
                     role: ["user"]
                 }
             );
-            console.log(response);
             toggleSucces(true);
             setRegistrationText(response.data.message);
         } catch (err) {
-            console.log(err.response.data.message);
             toggleError(true);
             setErrorText(err.response.data.message);
         }

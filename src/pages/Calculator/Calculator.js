@@ -44,12 +44,10 @@ export function Calculator() {
                     ingr: product
                 }
             });
-            console.log(response);
             setFoods([...foods, response.data.parsed[0].food]);
 
             // Catch block
         } catch (err) {
-            console.error(err)
             setInvalidProduct(true);
         }
     }

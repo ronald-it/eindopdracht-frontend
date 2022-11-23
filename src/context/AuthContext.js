@@ -14,7 +14,6 @@ export function AuthContextProvider({children}) {
 
     useEffect(() => {
             const token = localStorage.getItem('token');
-            console.log(token);
             if (token) {
                 toggleIsAuth({
                         authorization: true,
@@ -32,7 +31,6 @@ export function AuthContextProvider({children}) {
     )
 
     function loginUser(token) {
-        console.log("Gebruiker is ingelogd");
         localStorage.setItem('token', token);
         toggleIsAuth({
             authorization: true,
@@ -43,7 +41,6 @@ export function AuthContextProvider({children}) {
 
     function logoutUser() {
         localStorage.removeItem('token');
-        console.log("Gebruiker is uitgelogd");
         toggleIsAuth({
             authorization: false,
             status: 'done',
@@ -56,10 +53,6 @@ export function AuthContextProvider({children}) {
         userLogin: loginUser,
         userLogout: logoutUser,
     }
-
-    useEffect(() => {
-        console.log(isAuth.authorization)
-    }, [isAuth.authorization])
 
     return (
         <AuthContext.Provider value={data}>

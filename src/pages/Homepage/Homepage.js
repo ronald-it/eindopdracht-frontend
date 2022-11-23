@@ -29,6 +29,7 @@ export function Homepage() {
     const [recipes, setRecipes] = useState([]);
     const [carousel, setCarousel] = useState([]);
 
+    const [carouselError, toggleCarouselError] = useState(false);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const [invalidInput, setInvalidInput] = useState(false);
@@ -65,14 +66,12 @@ export function Homepage() {
             });
 
             setRecipes(response.data.hits);
-            console.log(response.data.hits);
             if (response.data.hits.length === 0) {
                 setInvalidInput(true);
             }
 
             // Catch block
         } catch (err) {
-            console.error(err)
             toggleError(true);
         }
 
@@ -82,6 +81,7 @@ export function Homepage() {
     useEffect(() => {
         const fetchDataCarousel = async () => {
             toggleLoadingCarousel(true);
+            toggleCarouselError(false);
 
             // Try block
             try {
@@ -96,12 +96,11 @@ export function Homepage() {
                     }
 
                 });
-                console.log(response.data.hits);
                 setCarousel(response.data.hits);
 
                 // Catch block
             } catch (err) {
-                console.error(err)
+                toggleCarouselError(true);
             }
         }
 
@@ -140,6 +139,12 @@ export function Homepage() {
                         <div className="inner-container-carousel" id="inner-container-carousel-id">
 
                             {loadingCarousel && <span>Loading...</span>}
+
+                            {carouselError &&
+                                <span className="carousel-error">
+                                    Something went wrong during the retrieval of the data, please refresh the page.
+                                </span>
+                            }
 
                             {Object.keys(carousel).length > 0 &&
                                 <>

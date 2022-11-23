@@ -13,7 +13,6 @@ const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
 export function Recipepage() {
     //Recipe ID
     const { id } = useParams();
-    console.log(id);
     //Declare endpoint variable
     const endpoint = `/api/recipes/v2/${id}`;
 
@@ -40,13 +39,10 @@ export function Recipepage() {
                     }
 
                 });
-                console.log(response.data.recipe);
                 setRecipeInfo(response.data.recipe);
-                console.log(response.data.recipe.ingredients);
 
                 // Catch block
             } catch (err) {
-                console.error(err)
                 toggleError(true);
             }
         }

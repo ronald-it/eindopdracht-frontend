@@ -14,13 +14,6 @@ export function Login() {
 
     const [error, toggleError] = useState(false);
 
-    useEffect(() => {
-        console.log(username)
-    }, [username])
-    useEffect(() => {
-        console.log(password)
-    }, [password])
-
     const postDataLogin = async () => {
         toggleError(false);
         try {
@@ -30,11 +23,8 @@ export function Login() {
                     password: password,
                 }
             );
-            console.log(response);
-            console.log(response.data.accessToken);
             userLogin(response.data.accessToken);
         } catch (err) {
-            console.log(err.response.data.message);
             toggleError(true);
         }
     }
@@ -54,7 +44,6 @@ export function Login() {
                         e.preventDefault();
                         toggleError(false);
                         postDataLogin();
-                        console.log("hello");
                         }
                     }
                 >
