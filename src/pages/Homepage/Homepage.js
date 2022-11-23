@@ -8,17 +8,17 @@ import {useEffect, useState} from "react";
 import magnifier from "../../assets/icons/search.png"
 import {AuthContext} from "../../context/AuthContext";
 
+//Declare variables for URI, endpoint, API ID and API Key
+const URI = 'https://api.edamam.com';
+const endpoint = '/api/recipes/v2';
+const API_ID = '44920bbe';
+const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
+
 export function Homepage() {
 
     const {authorization} = React.useContext(AuthContext);
 
-    //Opslaan van URI en endpoint
-    const URI = 'https://api.edamam.com';
-    const endpoint = '/api/recipes/v2';
-    const API_ID = '44920bbe';
-    const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
-
-    //Initialiseren van useState
+    //Initialize useState
 
     const [ingredient, setIngredient] = useState('');
     const [mealType, setMealType] = useState('');
@@ -37,7 +37,8 @@ export function Homepage() {
 
     const [randomizer, setRandomizer] = useState(0)
 
-    //Gebruik van setRandomizer voor de creatie van een getal in de Randomizer state
+    //Use of setRandomizer to create a number in de Randomizer state
+
     useEffect(() => {
         setRandomizer(Math.round(Math.random() * 17));
     }, []);
@@ -49,7 +50,7 @@ export function Homepage() {
 
         // Try block
         try {
-            // Response van request opslaan
+            // Save the response of the request
             const response = await axios.get(`${URI}${endpoint}`, {
                 params: {
                     type: 'public',
@@ -62,9 +63,6 @@ export function Homepage() {
                     time: time ? time : null,
                 }
             });
-            // console.log(response.data.hits);
-            // Create Elements functie aanroepen en parameters toevoegen
-            // createRecipeCardHome(response.data.hits);
 
             setRecipes(response.data.hits);
             console.log(response.data.hits);
@@ -82,13 +80,12 @@ export function Homepage() {
     }
 
     useEffect(() => {
-        //... voer dingen uit
         const fetchDataCarousel = async () => {
             toggleLoadingCarousel(true);
 
             // Try block
             try {
-                // Response van request opslaan
+                // Save the response of the request
                 const response = await axios.get(`${URI}${endpoint}`, {
 
                     params: {

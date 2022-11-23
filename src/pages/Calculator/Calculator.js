@@ -1,18 +1,18 @@
 import * as React from 'react';
 import './Calculator.css';
 import magnifier from '../../assets/icons/search.png';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
+
+//Declare variables for URI, endpoint, API ID and API Key
+const URI = 'https://api.edamam.com';
+const endpoint = '/api/food-database/v2/parser';
+const API_ID = 'ec73a27a';
+const API_KEY = '270cc5a42e9022d3b8f92f30feed3e6e';
 
 export function Calculator() {
 
-    //Opslaan van URI en endpoint
-    const URI = 'https://api.edamam.com';
-    const endpoint = '/api/food-database/v2/parser';
-    const API_ID = 'ec73a27a';
-    const API_KEY = '270cc5a42e9022d3b8f92f30feed3e6e';
-
-    //Initialiseren van useState
+    //Initialize useState
     const [foodInput, setFoodInput] = useState('');
 
     const [foods, setFoods] = useState([]);
@@ -28,21 +28,20 @@ export function Calculator() {
     const [invalidProduct, setInvalidProduct] = useState(false);
     const [invalidServingSize, setInvalidServingSize] = useState(false);
 
-    // Fetch data functie om de gegeven op te halen voor de eerste tabel op calculator page
+    // Fetch data function to retrieve the data for the first table on the calculator page
     const fetchDataCalculatorSearch = async (product) => {
         setInvalidProduct(false);
 
         // Try block
 
         try {
-            // Response van request opslaan
+            // Save the response of the request
             const response = await axios.get(`${URI}${endpoint}`, {
                 params: {
                     type: 'public',
                     app_id: API_ID,
                     app_key: API_KEY,
                     ingr: product
-                    // upc: product ? product : null
                 }
             });
             console.log(response);
@@ -91,7 +90,7 @@ export function Calculator() {
                         </form>
                     </div>
 
-                    {/*Eerste tabel calculator page*/}
+                    {/*First table calculator page*/}
 
                     {invalidProduct && <p className="invalid-product">Your input did not match with any products in the database, please change your input.</p>}
 
@@ -116,7 +115,7 @@ export function Calculator() {
                         </table>
                     </div>
 
-                    {/*Portie grootte input veld*/}
+                    {/*Serving size input field*/}
 
                     <div className="amount-div-calculator">
                         <form
@@ -164,7 +163,7 @@ export function Calculator() {
                         </form>
                     </div>
 
-                    {/*Calculator tabel*/}
+                    {/*Calculator table*/}
 
                     {invalidServingSize && <p className="invalid-serving-size">Please fill in a serving size of 1 or higher.</p>}
 

@@ -5,31 +5,31 @@ import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
+//Declare variables for URI, API ID and API Key
+const URI = 'https://api.edamam.com';
+const API_ID = '44920bbe';
+const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
+
 export function Recipepage() {
-    //Recept ID
+    //Recipe ID
     const { id } = useParams();
     console.log(id);
-
-    //Opslaan van URI en endpoint
-    const URI = 'https://api.edamam.com';
+    //Declare endpoint variable
     const endpoint = `/api/recipes/v2/${id}`;
-    const API_ID = '44920bbe';
-    const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
 
-    //Initialiseren van useState
+    //Initialize useState
     const [recipeInfo, setRecipeInfo] = useState([]);
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
     useEffect(() => {
-        //... voer dingen uit
         const fetchDataRecipePage = async () => {
             toggleError(false);
             toggleLoading(true);
 
             // Try block
             try {
-                // Response van request opslaan
+                // Save the response of the request
                 const response = await axios.get(`${URI}${endpoint}`, {
 
                     params: {
@@ -72,7 +72,7 @@ export function Recipepage() {
             <main className="outer-container-main-recipe">
                 <div className="inner-container-main-recipe" id="inner-container-main-recipe">
 
-                    {/*<!--Recept titel, bereidingsduur en klok icon-->*/}
+                    {/*<!--Recipe title, preparation time and clock icon-->*/}
 
                     <div className="title-and-time-image">
                         <h3 className="recipe-name">{recipeInfo.label}</h3>
@@ -83,7 +83,7 @@ export function Recipepage() {
                         </div>
                     </div>
 
-                    {/*<!--Tekst bereidingswijze en afbeelding recept-->*/}
+                    {/*<!--Preparation text and recipe picture-->*/}
 
                     <div className="recipe-text-and-image">
                         <div className="recipe-instructions">
@@ -110,7 +110,7 @@ export function Recipepage() {
                         </div>
                     </div>
 
-                    {/*<!--Ingrediënten en voedingswaarden-->*/}
+                    {/*<!--Ingredients and nutritional values-->*/}
 
                     <div className="recipe-ingredients-and-nutrients">
                         <div className="recipe-ingredients">
