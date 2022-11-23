@@ -1,6 +1,5 @@
 .title-and-navbar {
     padding: 25px;
-    /*border: 3px solid red;*/
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -9,7 +8,6 @@
 }
 
 .ul-header {
-    /*border: 3px solid green;*/
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -17,7 +15,6 @@
 }
 
 .page-title {
-    /*border: 3px solid red;*/
     color: #283E53;
     font-weight: lighter;
     font-size: xx-large;

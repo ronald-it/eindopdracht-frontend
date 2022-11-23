@@ -1,5 +1,4 @@
 .main-login {
-    /*border: 2px solid red;*/
     margin: 2em;
 }
 
@@ -20,7 +19,6 @@
 #login-form {
     display: flex;
     flex-direction: column;
-    /*border: 2px solid green;*/
     padding: 3em;
     background-color: #283E53;
     color: white;

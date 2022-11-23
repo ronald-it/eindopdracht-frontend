@@ -1,7 +1,6 @@
 /* --------------- 4.1 Header ------------------- */
 .title-and-navbar {
     padding: 25px;
-    /*border: 3px solid red;*/
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -10,7 +9,6 @@
 }
 
 .ul-header {
-    /*border: 3px solid green;*/
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -18,7 +16,6 @@
 }
 
 .page-title {
-    /*border: 3px solid red;*/
     color: #283E53;
     font-weight: lighter;
 }
@@ -37,7 +34,6 @@
 }
 
 .hero-image-outer-container {
-    /*border: 3px solid blue;*/
     background-image: url("/src/assets/images/hero-image.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -50,7 +46,6 @@
 }
 
 .hero-image-inner-container {
-    /*border: 3px solid red;*/
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -85,7 +80,6 @@
 
 /* --------------- 4.2 Carousel ------------- */
 .outer-container-carousel {
-    /*border: 3px solid blue;*/
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -93,7 +87,6 @@
 }
 
 .inner-container-carousel {
-    /*border: 3px solid yellow;*/
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -245,13 +238,11 @@
 }
 
 .outer-container-searchbar {
-    /*border: 3px solid red;*/
     background-color: #283E53;
     padding: 50px;
 }
 
 .inner-container-searchbar {
-    /*border: 3px solid green;*/
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -259,7 +250,6 @@
 }
 
 #submit-form {
-    /*border: 3px solid red;*/
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -329,7 +319,6 @@
 
 /* --------------- 4.4 Search results ------------- */
 .outer-container-search-results {
-    /*border: 3px solid blue;*/
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -338,7 +327,6 @@
 }
 
 .inner-container-search-results {
-    /*border: 3px solid yellow;*/
     display: flex;
     flex-direction: row;
     justify-content: center;

@@ -1,5 +1,4 @@
 .main-registration {
-    /*border: 2px solid red;*/
     margin: 2em;
 }
 
@@ -15,7 +14,6 @@
 #registration-form {
     display: flex;
     flex-direction: column;
-    /*border: 2px solid green;*/
     padding: 3em;
     background-color: #283E53;
     color: white;

@@ -76,7 +76,7 @@ export function Calculator() {
                                        onChange={(e) => setFoodInput(e.target.value)}
                                 />
                             </label>
-                            <button id="magnifying-glass-calculator" type="button">
+                            <button id="magnifying-glass-calculator" type="submit">
                                 <img className="search-icon-calculator" src={magnifier} alt="search icon"/>
                             </button>
                             <button id="search-button-calculator" type="submit">Search 🡢</button>

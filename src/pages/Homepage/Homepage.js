@@ -243,7 +243,7 @@ export function Homepage() {
                                            id="search-bar" name="recipe" value={ingredient}
                                            onChange={(e) => setIngredient(e.target.value)}/>
                                 </label>
-                                <button id="magnifying-glass" type="button">
+                                <button id="magnifying-glass" type="submit">
                                     <img className="search-icon" src={magnifier} alt="search icon"/>
                                 </button>
                                 <label htmlFor="meals"></label>
@@ -314,7 +314,7 @@ export function Homepage() {
                     {/*<!--        Search results-->*/}
 
                     <div className="outer-container-search-results">
-                        <div id="inner-container-search-results" className="inner-container-search-results">
+                        <section id="inner-container-search-results" className="inner-container-search-results">
 
                             {error &&
                                 <span className="ingredient-error">
@@ -353,7 +353,7 @@ export function Homepage() {
                                     </div>
                                 </Link>
                             })}
-                        </div>
+                        </section>
                     </div>
                 </div>
             </main>
