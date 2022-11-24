@@ -2,16 +2,22 @@ import * as React from 'react';
 import {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 
+// Create context
 export const AuthContext = React.createContext({});
 
+//Context provider function
 export function AuthContextProvider({children}) {
 
+    // Initialize useState of authorization checker
     const [isAuth, toggleIsAuth] = useState({
         authorization: false,
         status: 'pending',
     });
+
+    // Declare history variable to be able to push to other page
     const history = useHistory();
 
+    // useEffect to check for a token in the local storage at every refresh
     useEffect(() => {
             const token = localStorage.getItem('token');
             if (token) {
@@ -30,6 +36,7 @@ export function AuthContextProvider({children}) {
         []
     )
 
+    // Login function
     function loginUser(token) {
         localStorage.setItem('token', token);
         toggleIsAuth({
@@ -39,6 +46,7 @@ export function AuthContextProvider({children}) {
         history.push('/');
     }
 
+    // Logout function
     function logoutUser() {
         localStorage.removeItem('token');
         toggleIsAuth({
@@ -47,6 +55,7 @@ export function AuthContextProvider({children}) {
         });
     }
 
+    // AuthContext provider, an object with the needed functions and states
     const data = {
         authorization: isAuth.authorization,
         toggleAuth: toggleIsAuth,
