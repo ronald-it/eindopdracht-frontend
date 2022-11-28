@@ -8,7 +8,7 @@ import axios from "axios";
 const URI = 'https://api.edamam.com';
 const endpoint = '/api/food-database/v2/parser';
 const API_ID = 'ec73a27a';
-const API_KEY = '270cc5a42e9022d3b8f92f30feed3e6e';
+const API_KEY = '';
 
 export function Calculator() {
 

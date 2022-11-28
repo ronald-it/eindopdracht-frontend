@@ -8,7 +8,7 @@ import axios from "axios";
 // Declare variables for URI, API ID and API Key
 const URI = 'https://api.edamam.com';
 const API_ID = '44920bbe';
-const API_KEY = 'e0b07558906ed952fb1226ace4bc0227'
+const API_KEY = ''
 
 export function Recipepage() {
     // Recipe ID
