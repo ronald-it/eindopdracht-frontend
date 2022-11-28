@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+Inhoudsopgave:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1 Inleiding
 
-## Available Scripts
+2 Installatie
 
-In the project directory, you can run:
+Inleiding
 
-### `npm start`
+Dit is de installatiehandleiding voor de applicatie. De applicatie heeft vijf verschillende pagina´s, een homepage, een recipepage, een calculator page, login page en een registration page. Op de homepage kan men een recept of ingrediënt invullen in de zoekbalk en/of op basis van gerechtstype, keuken, dieet en/of bereidingstijd een zoekactie maken. Hierbij verschijnen bij geldige input 20 receptenkaarten waarop men kan klikken om op unieke recipepages te komen. Ook kan men klikken op een van de drie receptenkaarten in de carousel boven de zoekbalk. Op de recipepages staan de unieke gegevens van de desbetreffende recepten. Men kan op de calculator page een of meer producten invullen, op zoeken (search) klikken en vervolgens de product(en) toevoegen aan de calculator tabel door een portiegrootte in te vullen en op toevoegen (add) te klikken. Om toegang te krijgen tot de searchbar op de homepage en de content op de calculator page moet er ingelogd worden. Dit kan gedaan worden op de login page, maar eerst moet er een account geregistreerd worden op de registration page. Hieronder is een schermontwerp van de belangrijkste pagina, de homepage.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Screenshot belangrijkste pagina](src/designs/homepage.jpg "Screenshot belangrijkste pagina")
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Installatie
 
-### `npm test`
+Om deze applicatie te kunnen gebruiken, zullen er eerst wat stappen genomen moeten worden om de installatie te voltooien.
+In ieder geval moet de gebruiker van deze applicatie het programma Webstorm installeren en verder is ook node.js nodig.
+Webstorm en node.js kunnen via de onderstaande twee links gedownload en vervolgens geïnstalleerd worden:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+https://www.jetbrains.com/webstorm/
 
-### `npm run build`
+https://nodejs.org/en/download/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Zodra dit gelukt is en het project is geladen in Webstorm, moet er in de terminal npm install ingevoerd worden en op enter gedrukt worden.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Nu zijn er alleen nog API keys nodig in bepaalde Javascript bestanden, die ervoor zorgen dat er data opgehaald kan worden uit de Edamam API (voedsel/recepten/ingrediënten database).
+De volgende API keys moeten tussen de aanhalingstekens achter const API_KEY worden geplaatst in de volgende bestanden:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+fetchDataCalculatorAdd: 270cc5a42e9022d3b8f92f30feed3e6e
 
-### `npm run eject`
+fetchDataCalculatorCalories: 270cc5a42e9022d3b8f92f30feed3e6e
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+fetchDataCalculatorSearch: 270cc5a42e9022d3b8f92f30feed3e6e
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+fetchDataCarousel: e0b07558906ed952fb1226ace4bc0227
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+fetchDataHome: e0b07558906ed952fb1226ace4bc0227
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+fetchDataRecipePage: e0b07558906ed952fb1226ace4bc0227
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Als deze API keys zijn ingevuld op de juiste plekken in de juiste bestanden, kan de applicatie gestart worden door middel van het commando npm start te typen in de terminal (linksonderin is er een knop om bij de terminal te komen) en op enter te drukken. Vervolgens kan er op de (normaal gesproken) localhost link geklikt worden die in de terminal verschijnt. Dit zal een venster openen in de browser en zorgt ervoor dat de homepage geladen wordt.
