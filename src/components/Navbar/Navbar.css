@@ -1,0 +1,38 @@
+.title-and-navbar {
+    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #EEEEEE;
+}
+
+.ul-header {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.page-title {
+    color: #283E53;
+    font-weight: lighter;
+    font-size: xx-large;
+}
+
+.ul-header > li {
+    padding-right: 3em;
+    text-decoration: none;
+    font-size: larger;
+    font-weight: bolder;
+    letter-spacing: 0.1mm;
+}
+
+.ul-header a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: #373737;
+}
+
+.clueless-cook-link {
+    text-decoration: none;
+}

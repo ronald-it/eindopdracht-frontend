@@ -1,0 +1,175 @@
+/* ------------------------------- 6. Areas Calculator Page ---------------------------------------- */
+/* --------------- 6.1 Main ------------------- */
+
+.outer-container-main-calculator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.inner-container-main-calculator {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 1050px;
+}
+
+.calorie-calculator-title {
+    color: #283E53;
+    margin-bottom: 2em;
+}
+
+.search-bar-div-calculator {
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#submit-form-calculator-search {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.search-bar-div-calculator input, button {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.search-bar-div-calculator button {
+    border: 1px solid black;
+    background-color: #70b6be;
+    color: #283E53;
+    height: 40px;
+    font-weight: bold;
+    width: 100px;
+}
+
+#search-bar-calculator {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: none;
+    border-radius: 3px 0 0 3px;
+    height: 40px;
+    width: 160px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0 1px 3px -1px;
+}
+
+#magnifying-glass-calculator {
+    background-color: white;
+    height: 40px;
+    width: 50px;
+    margin-left: -5px;
+    margin-right: 20px;
+    border: none;
+    border-radius: 0 3px 3px 0;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0 2px 5px -1px, rgba(0, 0, 0, 0.3) 0 1px 3px -1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.search-icon-calculator {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.invalid-product, .invalid-serving-size {
+    color: red;
+    font-weight: bold;
+}
+
+.calorie-calculator-product-table-div {
+    margin-bottom: 3em;
+}
+
+.calorie-calculator-product-table {
+    width: 400px;
+}
+
+.row-one-product td {
+    font-weight: bold;
+}
+
+.amount-div-calculator {
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#submit-form-calculator-add {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.amount-input-calculator {
+    width: 125px;
+}
+
+.amount-div-calculator input, button {
+    border-radius: 5px;
+}
+
+.amount-div-calculator input {
+    height: 40px;
+}
+
+.amount-input-calculator * {
+    height: 40px;
+}
+
+#amount-calculator {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+#add-button-calculator {
+    margin-left: 1em;
+    width: 100px;
+    font-weight: bold;
+    font-size: large;
+    background-color: #70b6be;
+    color: #283E53;
+}
+
+.calorie-calculator-calculation-table {
+    border-collapse: collapse;
+    width: 500px;
+}
+
+.row-one-calculation td {
+    font-weight: bold;
+    width: 125px;
+}
+
+.row-two-calculation td {
+    padding-bottom: 5px;
+}
+
+#total-row td {
+    padding-top: 10px;
+    border-top: 1px solid black;
+    width: 125px;
+}
+
+.calorie-calculator-calculation-table-total {
+    border-collapse: collapse;
+    width: 500px;
+}
