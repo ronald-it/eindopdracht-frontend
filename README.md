@@ -25,10 +25,10 @@ Zodra dit gelukt is en het project is geladen in Webstorm, moet er in de termina
 Nu zijn er alleen nog API keys nodig in bepaalde Javascript bestanden, die ervoor zorgen dat er data opgehaald kan worden uit de Edamam API (voedsel/recepten/ingrediënten database).
 De volgende API keys moeten tussen de aanhalingstekens achter const API_KEY worden geplaatst in de volgende bestanden:
 
-Calculator page: 270cc5a42e9022d3b8f92f30feed3e6e
+Calculatorpage: 270cc5a42e9022d3b8f92f30feed3e6e
 
 Homepage: e0b07558906ed952fb1226ace4bc0227
 
-Recipe page: e0b07558906ed952fb1226ace4bc0227
+Recipepage: e0b07558906ed952fb1226ace4bc0227
 
 Als deze API keys zijn ingevuld op de juiste plekken in de juiste bestanden, kan de applicatie gestart worden door middel van het commando npm start te typen in de terminal (linksonderin is er een knop om bij de terminal te komen) en op enter te drukken. Vervolgens kan er op de (normaal gesproken) localhost link geklikt worden die in de terminal verschijnt. Dit zal een venster openen in de browser en zorgt ervoor dat de homepage geladen wordt.
